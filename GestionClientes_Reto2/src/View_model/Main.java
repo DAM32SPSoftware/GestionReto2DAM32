@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Frame;
+import javax.swing.border.EtchedBorder;
 
 public class Main extends JFrame {
 
@@ -52,7 +53,7 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 534, 634);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(45, 58, 58));
+		contentPane.setBackground(new Color(138, 153, 148));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
@@ -64,7 +65,7 @@ public class Main extends JFrame {
 		//
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(new Color(4, 15, 15));
-		lblNewLabel.setIcon(new ImageIcon("resources/afterlife.png"));
+		lblNewLabel.setIcon(new ImageIcon("resources/letrero.png"));
 		lblNewLabel.setBounds(32, -23, 432, 235);
 		contentPane.add(lblNewLabel);
 		
@@ -119,7 +120,7 @@ public class Main extends JFrame {
 		btnSalir.setForeground(Color.WHITE);
 		btnSalir.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnSalir.setBorder(null);
-		btnSalir.setBackground(new Color(166, 117, 161));
+		btnSalir.setBackground(new Color(220, 20, 60));
 		btnSalir.setBounds(184, 540, 140, 35);
 		contentPane.add(btnSalir);
 		
