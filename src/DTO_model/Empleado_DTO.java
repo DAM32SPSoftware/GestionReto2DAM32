@@ -1,5 +1,6 @@
 package DTO_model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -10,9 +11,9 @@ public class Empleado_DTO {
 	private String apellido;
 	private Double sueldo;
 	private String dni;
-	private Timestamp fecha_entrada;
 	private String direccion;
 	private String ciudad;
+	private Date fecha_entrada;
 	
 	public Empleado_DTO() {
 		super();
@@ -28,18 +29,42 @@ public class Empleado_DTO {
 	 * @param fecha_entrada
 	 * @param direccion
 	 * @param ciudad
+	 * @param genero
 	 */
 	public Empleado_DTO(int id_empleado, int id_tipo_empleado, String nombre, String apellido, 
-			Double sueldo, String dni, Timestamp fecha_entrada, String direccion, String ciudad) {
+			Double sueldo, String dni, String direccion, String ciudad, Date fecha_entrada) {
 		this.id_empleado = id_empleado;
 		this.id_tipo_empleado = id_tipo_empleado;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.sueldo = sueldo;
 		this.dni = dni;
-		this.fecha_entrada = fecha_entrada;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
+		this.fecha_entrada = fecha_entrada;
+	}
+	/**
+	 * 
+	 * @param id_tipo_empleado
+	 * @param nombre
+	 * @param apellido
+	 * @param sueldo
+	 * @param dni
+	 * @param fecha_entrada
+	 * @param direccion
+	 * @param ciudad
+	 * @param genero
+	 */
+	public Empleado_DTO(int id_tipo_empleado, String nombre, String apellido, 
+			Double sueldo, String dni, String direccion, String ciudad, Date fecha_entrada) {
+		this.id_tipo_empleado = id_tipo_empleado;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.sueldo = sueldo;
+		this.dni = dni;
+		this.direccion = direccion;
+		this.ciudad = ciudad;
+		this.fecha_entrada = fecha_entrada;
 	}
 	//Getter Setter
 	/**
@@ -106,12 +131,12 @@ public class Empleado_DTO {
 	 * 
 	 * @return fecha_entrada
 	 */
-	public Timestamp getFecha_entrada() {return fecha_entrada;}
+	public Date getFecha_entrada() {return fecha_entrada;}
 	/**
 	 * 
 	 * @param fecha_entrada
 	 */
-	public void setFecha_entrada(Timestamp fecha_entrada) {this.fecha_entrada = fecha_entrada;}
+	public void setFecha_entrada(Date fecha_entrada) {this.fecha_entrada = fecha_entrada;}
 	/**
 	 * 
 	 * @return direccion
@@ -155,14 +180,12 @@ public class Empleado_DTO {
 				&& id_tipo_empleado == other.id_tipo_empleado && Objects.equals(nombre, other.nombre)
 				&& Objects.equals(sueldo, other.sueldo);
 	}
-	/**
-	 * ToString
-	 */
 	@Override
 	public String toString() {
 		return "Empleado_DTO [id_empleado=" + id_empleado + ", id_tipo_empleado=" + id_tipo_empleado + ", nombre="
-				+ nombre + ", apellido=" + apellido + ", sueldo=" + sueldo + ", dni=" + dni + ", fecha_entrada="
-				+ fecha_entrada + ", direccion=" + direccion + ", ciudad=" + ciudad + "]";
+				+ nombre + ", apellido=" + apellido + ", sueldo=" + sueldo + ", dni=" + dni + ", direccion=" + direccion
+				+ ", ciudad=" + ciudad + ", fecha_entrada=" + fecha_entrada + "]";
 	}
+	
 	
 }

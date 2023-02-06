@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controllers.Control_Empleado;
 import DTO_model.Empleado_DTO;
 
 import java.awt.Color;
