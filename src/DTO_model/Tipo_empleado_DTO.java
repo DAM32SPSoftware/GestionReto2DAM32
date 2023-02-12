@@ -3,7 +3,7 @@ package DTO_model;
 import java.util.Objects;
 
 public class Tipo_empleado_DTO {
-	public int id_empleado;
+	public int id_tipo;
 	public String nombre_tipo;
 	//
 	public Tipo_empleado_DTO() {
@@ -14,8 +14,8 @@ public class Tipo_empleado_DTO {
 	 * @param id_empleado
 	 * @param nombre_tipo
 	 */
-	public Tipo_empleado_DTO(int id_empleado, String nombre_tipo) {
-		this.id_empleado = id_empleado;
+	public Tipo_empleado_DTO(int id_tipo, String nombre_tipo) {
+		this.id_tipo = id_tipo;
 		this.nombre_tipo = nombre_tipo;
 	}
 	//GETTERS SETTER
@@ -23,12 +23,12 @@ public class Tipo_empleado_DTO {
 	 * 
 	 * @return id_empleado
 	 */
-	public int getId_empleado() {return id_empleado;}
+	public int getId_tipo() {return id_tipo;}
 	/**
 	 * 
 	 * @param id_empleado
 	 */
-	public void setId_empleado(int id_empleado) {this.id_empleado = id_empleado;}
+	public void setId_tipo(int id_empleado) {this.id_tipo = id_empleado;}
 	/**
 	 * 
 	 * @return nombre_tipo
@@ -43,7 +43,7 @@ public class Tipo_empleado_DTO {
 	//EQUALS HASH CODE
 	@Override
 	public int hashCode() {
-		return Objects.hash(id_empleado, nombre_tipo);
+		return Objects.hash(id_tipo, nombre_tipo);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -54,13 +54,13 @@ public class Tipo_empleado_DTO {
 		if (getClass() != obj.getClass())
 			return false;
 		Tipo_empleado_DTO other = (Tipo_empleado_DTO) obj;
-		return id_empleado == other.id_empleado && Objects.equals(nombre_tipo, other.nombre_tipo);
+		return id_tipo == other.id_tipo && Objects.equals(nombre_tipo, other.nombre_tipo);
 	}
 	
 	//TOSTRING
 	@Override
 	public String toString() {
-		return "Tipo_empleado_DTO [id_empleado=" + id_empleado + ", nombre_tipo=" + nombre_tipo + "]";
+		return "Tipo_empleado_DTO [id_empleado=" + id_tipo + ", nombre_tipo=" + nombre_tipo + "]";
 	}
 
 }

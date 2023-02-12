@@ -16,9 +16,11 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Frame;
 import javax.swing.border.EtchedBorder;
+
 
 public class Main extends JFrame {
 
@@ -45,6 +47,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setUndecorated(true);
 		//
 		Image imgIcon = Toolkit.getDefaultToolkit().getImage("resources/logoapp2.png");
         setIconImage(imgIcon);
@@ -72,8 +75,10 @@ public class Main extends JFrame {
 		JButton btnEmpleados = new JButton("Listado de Empleados");
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Listado_empleados Listado_empleados = new Listado_empleados();
-				Listado_empleados.setVisible(true);
+				Mostrar_empleados mostrar_emp;
+				mostrar_emp = new Mostrar_empleados();
+				mostrar_emp.llenarTabla();
+				mostrar_emp.setVisible(true);
 			}
 		});
 		btnEmpleados.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
@@ -110,6 +115,13 @@ public class Main extends JFrame {
 		contentPane.add(btnOperacionesConEmpleados);
 		
 		JButton btnHorarios = new JButton("Horarios");
+		btnHorarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mostrar_jornada mostrar_jornada = new Mostrar_jornada();
+				mostrar_jornada.llenarTabla();
+				mostrar_jornada.setVisible(true);
+			}
+		});
 		btnHorarios.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnHorarios.setBorder(null);
 		btnHorarios.setBackground(new Color(251, 249, 255));

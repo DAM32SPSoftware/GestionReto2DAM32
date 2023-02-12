@@ -21,7 +21,7 @@ public class Tipo_empleado_DAO implements Patron_DAO<Tipo_empleado_DTO>{
 		PreparedStatement ps = null;
 		try {
 			ps = conn.getCon().prepareStatement(SQL_INSERT);
-			ps.setInt(1, t.getId_empleado());
+			ps.setInt(1, t.getId_tipo());
             ps.setString(2, t.getNombre_tipo());
             if(ps.executeUpdate()>0) {
             	return true;

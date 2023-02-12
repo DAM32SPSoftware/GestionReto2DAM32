@@ -29,19 +29,19 @@ public class Empleado_DTO {
 	 * @param fecha_entrada
 	 * @param direccion
 	 * @param ciudad
-	 * @param genero
 	 */
 	public Empleado_DTO(int id_empleado, int id_tipo_empleado, String nombre, String apellido, 
-			Double sueldo, String dni, String direccion, String ciudad, Date fecha_entrada) {
+			Double sueldo, String dni, Date fecha_entrada, String direccion, String ciudad) {
 		this.id_empleado = id_empleado;
 		this.id_tipo_empleado = id_tipo_empleado;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.sueldo = sueldo;
 		this.dni = dni;
+		this.fecha_entrada = fecha_entrada;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
-		this.fecha_entrada = fecha_entrada;
+		
 	}
 	/**
 	 * 

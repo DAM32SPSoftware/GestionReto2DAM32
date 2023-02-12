@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,14 +38,15 @@ public class Operaciones_generales extends JFrame {
 	private JTextField tfSueldo;
 	private JTextField tfEntrada;
 	private JTextField tfDNI;
-	private JTextField textField_5;
 	//
 	public static Empleado_DAO empDAO = new Empleado_DAO();
 	public static Tipo_empleado_DAO puestoDAO = new Tipo_empleado_DAO();
 	static ArrayList<Tipo_empleado_DTO> puestos;
+	static ArrayList<Empleado_DTO> empleados;
 	private JTextField tfDireccion;
 	private JTextField tfCiudad;
 	private JTextField tfId;
+	Empleado_DTO emp_dto;
 	//
 	/**
 	 * Launch the application.
@@ -66,16 +68,21 @@ public class Operaciones_generales extends JFrame {
 	 * Create the frame.
 	 */
 	public Operaciones_generales() {
+		setUndecorated(true);
 		puestos = puestoDAO.listarTodos();
+		empleados = empDAO.listarTodos();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1030, 720);
+		setBounds(100, 100, 1030, 675);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(138, 153, 148));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		//
+		setResizable(false);
+		setLocationRelativeTo(null);
+		//
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
@@ -154,21 +161,10 @@ public class Operaciones_generales extends JFrame {
 		separator_1.setBounds(21, 68, 952, 12);
 		contentPane.add(separator_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		textField_5.setColumns(10);
-		textField_5.setBounds(21, 151, 369, 33);
-		contentPane.add(textField_5);
-		
-		JButton btnNewButton = new JButton("BUSCAR");
-		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-		btnNewButton.setBounds(434, 150, 141, 33);
-		contentPane.add(btnNewButton);
-		
 		JComboBox combo = new JComboBox();
 		combo.setBounds(31, 318, 359, 29);
 		for (int i = 0; i < puestos.size(); i++) {
-			combo.addItem(puestos.get(i).getId_empleado() + " - "+ puestos.get(i).getNombre_tipo());
+			combo.addItem(puestos.get(i).getId_tipo() + " - "+ puestos.get(i).getNombre_tipo());
         }
 		contentPane.add(combo);
 		
@@ -178,7 +174,7 @@ public class Operaciones_generales extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//String id = tfId.getText();
 				//Integer num_id = Integer.parseInt(id);
-				int tipo = puestos.get(combo.getSelectedIndex()).getId_empleado();
+				int tipo = puestos.get(combo.getSelectedIndex()).getId_tipo();
 				String nombre = tfNombre.getText();
 				String apellido = tfApellido.getText();
 				String sueldo = tfSueldo.getText();
@@ -193,6 +189,7 @@ public class Operaciones_generales extends JFrame {
 					Empleado_DTO _emp = new Empleado_DTO(tipo, nombre, apellido, num_sueldo, dni, direccion, ciudad, fecha);
 					empDAO.insertar(_emp);
 					JOptionPane.showMessageDialog(null, "Empleado AGREGADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+					empleados = empDAO.listarTodos();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -203,18 +200,48 @@ public class Operaciones_generales extends JFrame {
 		contentPane.add(btnAgregar);
 		
 		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				empDAO.borrar(Integer.parseInt(tfId.getText()));
+				empleados = empDAO.listarTodos();
+			}
+		});
 		btnEliminar.setForeground(new Color(255, 69, 0));
 		btnEliminar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnEliminar.setBounds(462, 612, 141, 33);
 		contentPane.add(btnEliminar);
 		
 		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = emp_dto.getId_empleado();
+				int tipo = puestos.get(combo.getSelectedIndex()).getId_tipo();
+				String nombre = tfNombre.getText();
+				String apellido = tfApellido.getText();
+				String sueldo = tfSueldo.getText();
+				double num_sueldo = Double.parseDouble(sueldo);
+				String dni = tfDNI.getText();
+				String direccion = tfDireccion.getText();
+				String ciudad = tfCiudad.getText();
+				Date fecha = new Date(System.currentTimeMillis());
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				
+				try {
+					Empleado_DTO _emp = new Empleado_DTO(id, tipo, nombre, apellido, num_sueldo, dni, fecha, ciudad, direccion);
+					empDAO.actualizar(_emp);
+					JOptionPane.showMessageDialog(null, "Empleado MODIFICADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+					empleados = empDAO.listarTodos();
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		btnModificar.setForeground(new Color(220, 20, 60));
 		btnModificar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnModificar.setBounds(254, 612, 141, 33);
 		contentPane.add(btnModificar);
 		
-		JLabel lblRealizarOperacionesCon = new JLabel("Realizar operaciones con los empleados. Utilizar 'buscar' para eliminar o modificar un empleado introduciendo su nombre.");
+		JLabel lblRealizarOperacionesCon = new JLabel("Realizar operaciones con los empleados. Utilizar el selector para eliminar o modificar un empleado.");
 		lblRealizarOperacionesCon.setForeground(Color.WHITE);
 		lblRealizarOperacionesCon.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
 		lblRealizarOperacionesCon.setBounds(31, 68, 942, 41);
@@ -288,6 +315,31 @@ public class Operaciones_generales extends JFrame {
 		tfId.setBounds(156, 220, 234, 33);
 		contentPane.add(tfId);
 		
+		JComboBox combo_buscar = new JComboBox();
+		combo_buscar.setBounds(31, 150, 359, 29);
+		contentPane.add(combo_buscar);
+		for (int i = 0; i < empleados.size(); i++) {
+			combo_buscar.addItem(empleados.get(i).getNombre() + " " + empleados.get(i).getApellido());
+		}
+		combo_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int pos = combo_buscar.getSelectedIndex();
+				emp_dto = empleados.get(pos);
+				for (int i = 0; i < puestos.size(); i++) {
+					if(puestos.get(i).getId_tipo() == empleados.get(combo_buscar.getSelectedIndex()).getId_tipo_empleado()) {
+						combo.setSelectedIndex(i);
+					}
+				}
+				tfId.setText(""+emp_dto.getId_empleado());
+				tfNombre.setText(emp_dto.getNombre());
+				tfApellido.setText(emp_dto.getApellido());
+				tfDNI.setText(emp_dto.getDni());
+				tfSueldo.setText(""+emp_dto.getSueldo());
+				tfDireccion.setText(emp_dto.getDireccion());
+				tfCiudad.setText(emp_dto.getDireccion());
+				tfEntrada.setText(""+emp_dto.getFecha_entrada());
+			}
+		});
 		
 	}
 }
