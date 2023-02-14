@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import DAO_model.Empleado_DAO;
 import DAO_model.Jornada_DAO;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 public class Mostrar_jornada extends JDialog {
 
@@ -60,6 +63,7 @@ public class Mostrar_jornada extends JDialog {
 	 * Create the dialog.
 	 */
 	public Mostrar_jornada() {
+		setUndecorated(true);
 		empleados = empDAO.listarTodos();
 		jornada = jornadaDAO.listarTodos();
 		//
@@ -67,10 +71,10 @@ public class Mostrar_jornada extends JDialog {
 			nombresEmpleados.add(empleado.getNombre());
 		}
 		//
-		setBounds(100, 100, 920, 548);
+		setBounds(100, 100, 920, 584);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(138, 153, 148));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		//
@@ -85,7 +89,7 @@ public class Mostrar_jornada extends JDialog {
 		};
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(62, 115, 752, 237);
+		scrollPane.setBounds(62, 96, 752, 237);
 		contentPanel.add(scrollPane);
 		// ************************************************
 		// TABLA
@@ -95,9 +99,19 @@ public class Mostrar_jornada extends JDialog {
 		dtm.addColumn("Hora Entrada");
 		dtm.addColumn("Hora Salida");
 		// ************************************************
+		Color rosa = new Color(220, 20, 60);
+		JTableHeader header = table.getTableHeader();
+		header.setBackground(rosa);
+		header.setForeground(Color.WHITE);
+		header.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		table.setBackground(Color.WHITE);
+		table.setForeground(Color.DARK_GRAY);
+		// ************************************************
+
 		scrollPane.setViewportView(table);
 		JComboBox combo_nom = new JComboBox();
-		combo_nom.setBounds(460, 395, 354, 29);
+		combo_nom.setBounds(438, 362, 211, 29);
 		for (int i = 1; i < empleados.size(); i++) {
 			combo_nom.addItem(empleados.get(i).getNombre());
 		}
@@ -106,9 +120,13 @@ public class Mostrar_jornada extends JDialog {
 		combo_nom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int pos = combo_nom.getSelectedIndex();
-				Empleado_DTO empDTO = empleados.get(pos);
-				jornada = jornadaDAO.listarPorNombre(empDTO);
-				llenarTabla();
+				try {
+					Empleado_DTO empDTO = empleados.get(pos);
+					jornada = jornadaDAO.listarPorNombre(empDTO);
+					llenarTabla();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
 			}
 		});
 
@@ -125,7 +143,7 @@ public class Mostrar_jornada extends JDialog {
 		JLabel lblSeleccionaUnEmpleado = new JLabel("Selecciona un empleado para mostrar su registro:");
 		lblSeleccionaUnEmpleado.setForeground(Color.WHITE);
 		lblSeleccionaUnEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblSeleccionaUnEmpleado.setBounds(62, 387, 388, 41);
+		lblSeleccionaUnEmpleado.setBounds(62, 354, 388, 41);
 		contentPanel.add(lblSeleccionaUnEmpleado);
 
 		JButton btnAtrs = new JButton("ATRÁS");
@@ -138,8 +156,43 @@ public class Mostrar_jornada extends JDialog {
 		btnAtrs.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnAtrs.setBorder(null);
 		btnAtrs.setBackground(new Color(220, 20, 60));
-		btnAtrs.setBounds(699, 466, 115, 35);
+		btnAtrs.setBounds(371, 524, 115, 38);
 		contentPanel.add(btnAtrs);
+
+		JButton btnInformeGeneral = new JButton("Informe General");
+		btnInformeGeneral.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
+		btnInformeGeneral.setBorder(null);
+		btnInformeGeneral.setBackground(new Color(251, 249, 255));
+		btnInformeGeneral.setBounds(62, 421, 220, 41);
+		contentPanel.add(btnInformeGeneral);
+
+		JButton btnInformePorEmpleado = new JButton("Informe por Empleado");
+		btnInformePorEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
+		btnInformePorEmpleado.setBorder(null);
+		btnInformePorEmpleado.setBackground(new Color(251, 249, 255));
+		btnInformePorEmpleado.setBounds(338, 421, 219, 41);
+		contentPanel.add(btnInformePorEmpleado);
+		
+		JButton btnMostrar = new JButton("Mostrar Todo");
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dtm.setRowCount(0);
+				combo_nom.setSelectedIndex(0);
+				jornada.clear();
+				jornada = jornadaDAO.listarTodos();
+				llenarTabla();
+			}
+		});
+		btnMostrar.setForeground(new Color(220, 20, 60));
+		btnMostrar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
+		btnMostrar.setBorder(null);
+		btnMostrar.setBackground(new Color(251, 249, 255));
+		btnMostrar.setBounds(680, 362, 134, 29);
+		contentPanel.add(btnMostrar);
+		
+		JSeparator separator_1_1_1_1 = new JSeparator();
+		separator_1_1_1_1.setBounds(30, 502, 880, 12);
+		contentPanel.add(separator_1_1_1_1);
 
 	}
 

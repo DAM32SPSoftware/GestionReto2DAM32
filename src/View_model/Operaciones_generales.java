@@ -29,6 +29,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class Operaciones_generales extends JFrame {
 
@@ -75,7 +77,7 @@ public class Operaciones_generales extends JFrame {
 		setBounds(100, 100, 1030, 675);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(138, 153, 148));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -169,6 +171,9 @@ public class Operaciones_generales extends JFrame {
 		contentPane.add(combo);
 		
 		JButton btnAgregar = new JButton("AGREGAR");
+		btnAgregar.setBackground(new Color(255, 255, 255));
+		btnAgregar.setBorder(null);
+		btnAgregar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAgregar.setForeground(new Color(0, 128, 0));
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,10 +205,19 @@ public class Operaciones_generales extends JFrame {
 		contentPane.add(btnAgregar);
 		
 		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.setBackground(new Color(255, 255, 255));
+		btnEliminar.setBorder(null);
+		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				empDAO.borrar(Integer.parseInt(tfId.getText()));
-				empleados = empDAO.listarTodos();
+				try {
+					empDAO.borrar(Integer.parseInt(tfId.getText()));
+					empleados = empDAO.listarTodos();
+					JOptionPane.showMessageDialog(null, "Empleado ELIMINADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 			}
 		});
 		btnEliminar.setForeground(new Color(255, 69, 0));
@@ -212,6 +226,9 @@ public class Operaciones_generales extends JFrame {
 		contentPane.add(btnEliminar);
 		
 		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar.setBackground(new Color(255, 255, 255));
+		btnModificar.setBorder(null);
+		btnModificar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id = emp_dto.getId_empleado();
@@ -252,6 +269,9 @@ public class Operaciones_generales extends JFrame {
 		contentPane.add(separator_1_1);
 		
 		JButton btnLimpiar = new JButton("LIMPIAR");
+		btnLimpiar.setBackground(new Color(255, 255, 255));
+		btnLimpiar.setBorder(null);
+		btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimpiar.setForeground(new Color(100, 149, 237));
 		btnLimpiar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnLimpiar.setBounds(665, 612, 141, 33);
@@ -341,5 +361,17 @@ public class Operaciones_generales extends JFrame {
 			}
 		});
 		
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfId.setText("");
+				tfNombre.setText("");
+				tfApellido.setText("");
+				tfSueldo.setText("");
+				tfEntrada.setText("");
+				tfDNI.setText("");
+				tfDireccion.setText("");
+				tfCiudad.setText("");
+			}
+		});
 	}
 }

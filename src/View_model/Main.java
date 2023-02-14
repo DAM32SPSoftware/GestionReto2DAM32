@@ -20,6 +20,8 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Frame;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 
 public class Main extends JFrame {
@@ -57,7 +59,7 @@ public class Main extends JFrame {
 		setBounds(100, 100, 534, 634);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(138, 153, 148));
-		contentPane.setBorder(null);
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -128,7 +130,14 @@ public class Main extends JFrame {
 		btnHorarios.setBounds(137, 384, 231, 41);
 		contentPane.add(btnHorarios);
 		
-		JButton btnBsquedas = new JButton("Administrar Chat");
+		JButton btnBsquedas = new JButton("Administrar Usuarios");
+		btnBsquedas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mostrar_Usuarios mostrar_usuario = new Mostrar_Usuarios();
+				mostrar_usuario.llenarTabla();
+				mostrar_usuario.setVisible(true);
+			}
+		});
 		btnBsquedas.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnBsquedas.setBorder(null);
 		btnBsquedas.setBackground(new Color(251, 249, 255));

@@ -11,7 +11,10 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 import DAO_model.Empleado_DAO;
 import DAO_model.Tipo_empleado_DAO;
@@ -27,6 +30,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.Normalizer;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 public class Mostrar_empleados extends JDialog {
 
@@ -67,7 +74,7 @@ public class Mostrar_empleados extends JDialog {
 		setBounds(100, 100, 914, 741);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(138, 153, 148));
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		//
@@ -222,6 +229,15 @@ public class Mostrar_empleados extends JDialog {
 		dtm.addColumn("Direccion");
 		dtm.addColumn("Ciudad");
 		// ************************************************
+		Color rosa = new Color(220, 20, 60);
+		JTableHeader header = table.getTableHeader();
+		header.setBackground(rosa);
+		header.setForeground(Color.WHITE);
+		header.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		table.setBackground(Color.WHITE);
+		table.setForeground(Color.DARK_GRAY);
+
 		scrollPane.setViewportView(table);
 		JComboBox combo_tipo = new JComboBox();
 		combo_tipo.setBounds(101, 616, 302, 35);
