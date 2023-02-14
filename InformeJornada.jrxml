@@ -58,90 +58,69 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="102" splitType="Stretch">
+		<band height="128" splitType="Stretch">
 			<image>
-				<reportElement x="725" y="0" width="77" height="102" uuid="651ccc4b-e999-40fe-bcbf-1f25bcfc98af"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+				<reportElement x="260" y="0" width="385" height="80" uuid="651ccc4b-e999-40fe-bcbf-1f25bcfc98af"/>
+				<imageExpression><![CDATA["/resources/letrero.png"]]></imageExpression>
 			</image>
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
-				<staticText>
-					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
-					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
-					<textElement verticalAlignment="Bottom">
-						<font isBold="false"/>
-					</textElement>
-					<text><![CDATA[Cherry Title]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
-					<textElement textAlignment="Right">
-						<font size="22" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Cherry SubTitle]]></text>
-				</staticText>
-			</frame>
-			<frame>
-				<reportElement mode="Opaque" x="0" y="70" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="b0c895f6-6dbd-477d-9858-9ad66af087e1"/>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="a33fce3b-20c1-4696-873a-fe134d1e7d88"/>
-					<textElement textAlignment="Right">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
+			<staticText>
+				<reportElement x="150" y="80" width="550" height="48" uuid="0f7f955b-0257-49eb-ae0a-bc7e915e9b49"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="16"/>
+				</textElement>
+				<text><![CDATA[Ficha Técnica de un Empleado específico y su registro de Jornada Laboral.]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="18" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="159" height="18" forecolor="#000000" uuid="e0e9807d-27bd-4b30-86e2-179edca75dc6">
+				<reportElement style="Column header" x="0" y="0" width="159" height="30" forecolor="#DC143C" uuid="e0e9807d-27bd-4b30-86e2-179edca75dc6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4f6b0db2-5f11-4cc7-9fa0-62308bc30912"/>
 				</reportElement>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Trebuchet MS" isBold="false"/>
 				</textElement>
-				<text><![CDATA[usuario]]></text>
+				<text><![CDATA[Usuario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="159" y="0" width="159" height="18" forecolor="#000000" uuid="4562be09-47b4-44cf-989c-27ab89d758fe">
+				<reportElement style="Column header" x="159" y="0" width="159" height="30" forecolor="#DC143C" uuid="4562be09-47b4-44cf-989c-27ab89d758fe">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4aed2096-af2b-48ad-a52b-95180370f2bb"/>
 				</reportElement>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Trebuchet MS" isBold="false"/>
 				</textElement>
-				<text><![CDATA[nombre]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="318" y="0" width="159" height="18" forecolor="#000000" uuid="0489450f-22c4-4d7f-85b9-0889074a69ee">
+				<reportElement style="Column header" x="318" y="0" width="159" height="30" forecolor="#DC143C" uuid="0489450f-22c4-4d7f-85b9-0889074a69ee">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d24977f5-59a6-4d51-a592-cbc838c9544f"/>
 				</reportElement>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Trebuchet MS" isBold="false"/>
 				</textElement>
-				<text><![CDATA[apellido]]></text>
+				<text><![CDATA[Apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="477" y="0" width="159" height="18" forecolor="#000000" uuid="cd74394d-8724-4843-8630-e1bd5b3c6add">
+				<reportElement style="Column header" x="477" y="0" width="159" height="30" forecolor="#DC143C" uuid="cd74394d-8724-4843-8630-e1bd5b3c6add">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36621fd4-0faf-481a-9150-3317238b1eae"/>
 				</reportElement>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Trebuchet MS" isBold="false"/>
 				</textElement>
-				<text><![CDATA[hora_entrada]]></text>
+				<text><![CDATA[Hora Entrada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="636" y="0" width="159" height="18" forecolor="#000000" uuid="1e739b41-04b2-4b6c-be31-999939b68aaf">
+				<reportElement style="Column header" x="636" y="0" width="159" height="30" forecolor="#DC143C" uuid="1e739b41-04b2-4b6c-be31-999939b68aaf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2e3f8dec-3257-442b-8291-8a0b78a6a2bf"/>
 				</reportElement>
 				<textElement>
-					<font isBold="false"/>
+					<font fontName="Trebuchet MS" isBold="false"/>
 				</textElement>
-				<text><![CDATA[hora_salida]]></text>
+				<text><![CDATA[Hora Salida]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -154,7 +133,7 @@ WHERE
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4f6b0db2-5f11-4cc7-9fa0-62308bc30912"/>
 					</reportElement>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Trebuchet MS" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
 				</textField>
@@ -163,7 +142,7 @@ WHERE
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4aed2096-af2b-48ad-a52b-95180370f2bb"/>
 					</reportElement>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Trebuchet MS" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 				</textField>
@@ -172,7 +151,7 @@ WHERE
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d24977f5-59a6-4d51-a592-cbc838c9544f"/>
 					</reportElement>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Trebuchet MS" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
 				</textField>
@@ -181,7 +160,7 @@ WHERE
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36621fd4-0faf-481a-9150-3317238b1eae"/>
 					</reportElement>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Trebuchet MS" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{hora_entrada}]]></textFieldExpression>
 				</textField>
@@ -190,7 +169,7 @@ WHERE
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2e3f8dec-3257-442b-8291-8a0b78a6a2bf"/>
 					</reportElement>
 					<textElement>
-						<font size="14"/>
+						<font fontName="Trebuchet MS" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{hora_salida}]]></textFieldExpression>
 				</textField>
@@ -214,21 +193,21 @@ WHERE
 				<textField evaluationTime="Report">
 					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="b5521ea6-5f36-4864-856f-58d0bcd011f2"/>
 					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="e625ea3c-1741-4cfe-81cf-fbbdd00162c8"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="0c9f7e91-d3f5-47f9-82b7-0b2b3a43a5d6"/>
 					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
+						<font fontName="Trebuchet MS" size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>

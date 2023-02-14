@@ -112,7 +112,7 @@ public class Mostrar_jornada extends JDialog {
 		scrollPane.setViewportView(table);
 		JComboBox combo_nom = new JComboBox();
 		combo_nom.setBounds(438, 362, 211, 29);
-		for (int i = 1; i < empleados.size(); i++) {
+		for (int i = 0; i < empleados.size(); i++) {
 			combo_nom.addItem(empleados.get(i).getNombre());
 		}
 		contentPanel.add(combo_nom);

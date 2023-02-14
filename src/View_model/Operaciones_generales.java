@@ -40,6 +40,7 @@ public class Operaciones_generales extends JFrame {
 	private JTextField tfSueldo;
 	private JTextField tfEntrada;
 	private JTextField tfDNI;
+	private JComboBox combo;
 	//
 	public static Empleado_DAO empDAO = new Empleado_DAO();
 	public static Tipo_empleado_DAO puestoDAO = new Tipo_empleado_DAO();
@@ -88,69 +89,69 @@ public class Operaciones_generales extends JFrame {
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblNombre.setBounds(31, 383, 82, 41);
+		lblNombre.setBounds(21, 323, 82, 41);
 		contentPane.add(lblNombre);
 		
 		tfNombre = new JTextField();
 		tfNombre.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfNombre.setColumns(10);
-		tfNombre.setBounds(123, 387, 267, 33);
+		tfNombre.setBounds(113, 327, 267, 33);
 		contentPane.add(tfNombre);
 		
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setForeground(Color.WHITE);
 		lblApellido.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblApellido.setBounds(31, 438, 82, 41);
+		lblApellido.setBounds(21, 378, 82, 41);
 		contentPane.add(lblApellido);
 		
 		tfApellido = new JTextField();
 		tfApellido.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfApellido.setColumns(10);
-		tfApellido.setBounds(123, 442, 267, 33);
+		tfApellido.setBounds(113, 382, 267, 33);
 		contentPane.add(tfApellido);
 		
 		JLabel lblEmail = new JLabel("Sueldo");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblEmail.setBounds(478, 332, 82, 41);
+		lblEmail.setBounds(475, 156, 82, 41);
 		contentPane.add(lblEmail);
 		
 		tfSueldo = new JTextField();
 		tfSueldo.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfSueldo.setColumns(10);
-		tfSueldo.setBounds(585, 336, 303, 33);
+		tfSueldo.setBounds(582, 160, 303, 33);
 		contentPane.add(tfSueldo);
 		
 		JLabel lblActivo = new JLabel("Tipo de Empleado");
 		lblActivo.setForeground(Color.WHITE);
 		lblActivo.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblActivo.setBounds(31, 267, 150, 41);
+		lblActivo.setBounds(21, 207, 150, 41);
 		contentPane.add(lblActivo);
 		
 		JLabel lblFecha = new JLabel("Fecha Entrada");
 		lblFecha.setForeground(Color.WHITE);
 		lblFecha.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblFecha.setBounds(478, 496, 125, 41);
+		lblFecha.setBounds(475, 320, 125, 41);
 		contentPane.add(lblFecha);
 		
 		tfEntrada = new JTextField();
 		tfEntrada.setToolTipText("Fecha de Entrada");
 		tfEntrada.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfEntrada.setColumns(10);
-		tfEntrada.setBounds(628, 501, 260, 31);
+		tfEntrada.setBounds(625, 325, 260, 31);
 		contentPane.add(tfEntrada);
 		
 		JLabel lblltimaActualizacin = new JLabel("DNI");
 		lblltimaActualizacin.setForeground(Color.WHITE);
 		lblltimaActualizacin.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblltimaActualizacin.setBounds(31, 496, 46, 41);
+		lblltimaActualizacin.setBounds(21, 436, 46, 41);
 		contentPane.add(lblltimaActualizacin);
 		
 		tfDNI = new JTextField();
 		tfDNI.setToolTipText("Fecha de Entrada");
 		tfDNI.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfDNI.setColumns(10);
-		tfDNI.setBounds(123, 501, 267, 31);
+		tfDNI.setBounds(113, 441, 267, 31);
 		contentPane.add(tfDNI);
 		
 		JLabel lblAquPuedesRealizar = new JLabel("TRAMITAR EMPLEADOS");
@@ -163,13 +164,15 @@ public class Operaciones_generales extends JFrame {
 		separator_1.setBounds(21, 68, 952, 12);
 		contentPane.add(separator_1);
 		
-		JComboBox combo = new JComboBox();
-		combo.setBounds(31, 318, 359, 29);
+		combo = new JComboBox();
+		combo.setBounds(21, 258, 359, 29);
 		for (int i = 0; i < puestos.size(); i++) {
 			combo.addItem(puestos.get(i).getId_tipo() + " - "+ puestos.get(i).getNombre_tipo());
         }
 		contentPane.add(combo);
-		
+		JComboBox combo_buscar = new JComboBox();
+		combo_buscar.setBounds(21, 568, 359, 29);
+		contentPane.add(combo_buscar);
 		JButton btnAgregar = new JButton("AGREGAR");
 		btnAgregar.setBackground(new Color(255, 255, 255));
 		btnAgregar.setBorder(null);
@@ -195,13 +198,20 @@ public class Operaciones_generales extends JFrame {
 					empDAO.insertar(_emp);
 					JOptionPane.showMessageDialog(null, "Empleado AGREGADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
 					empleados = empDAO.listarTodos();
+					combo_buscar.removeAllItems();
+					
+					
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				for (int i = 0; i < empleados.size(); i++) {
+					combo_buscar.addItem(empleados.get(i).getNombre() + " " + empleados.get(i).getApellido());
+				}
+				limpiar();
 			}
 		});
 		btnAgregar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-		btnAgregar.setBounds(47, 612, 141, 33);
+		btnAgregar.setBounds(744, 401, 141, 33);
 		contentPane.add(btnAgregar);
 		
 		JButton btnEliminar = new JButton("ELIMINAR");
@@ -212,17 +222,23 @@ public class Operaciones_generales extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					empDAO.borrar(Integer.parseInt(tfId.getText()));
-					empleados = empDAO.listarTodos();
 					JOptionPane.showMessageDialog(null, "Empleado ELIMINADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+					empleados = empDAO.listarTodos();
+					combo_buscar.removeAllItems();
+					
+					
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
+				for (int i = 0; i < empleados.size(); i++) {
+					combo_buscar.addItem(empleados.get(i).getNombre() + " " + empleados.get(i).getApellido());
+				}
+				limpiar();
 			}
 		});
 		btnEliminar.setForeground(new Color(255, 69, 0));
 		btnEliminar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-		btnEliminar.setBounds(462, 612, 141, 33);
+		btnEliminar.setBounds(239, 612, 141, 33);
 		contentPane.add(btnEliminar);
 		
 		JButton btnModificar = new JButton("MODIFICAR");
@@ -246,16 +262,23 @@ public class Operaciones_generales extends JFrame {
 				try {
 					Empleado_DTO _emp = new Empleado_DTO(id, tipo, nombre, apellido, num_sueldo, dni, fecha, ciudad, direccion);
 					empDAO.actualizar(_emp);
-					JOptionPane.showMessageDialog(null, "Empleado MODIFICADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Empleado MODIFICADO con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);					
 					empleados = empDAO.listarTodos();
+					combo_buscar.removeAllItems();
+					
+					
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Operación calcelada.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				for (int i = 0; i < empleados.size(); i++) {
+					combo_buscar.addItem(empleados.get(i).getNombre() + " " + empleados.get(i).getApellido());
+				}
+				limpiar();
 			}
 		});
 		btnModificar.setForeground(new Color(220, 20, 60));
 		btnModificar.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-		btnModificar.setBounds(254, 612, 141, 33);
+		btnModificar.setBounds(21, 612, 141, 33);
 		contentPane.add(btnModificar);
 		
 		JLabel lblRealizarOperacionesCon = new JLabel("Realizar operaciones con los empleados. Utilizar el selector para eliminar o modificar un empleado.");
@@ -290,54 +313,52 @@ public class Operaciones_generales extends JFrame {
 		btnAtrs.setBounds(858, 611, 115, 35);
 		contentPane.add(btnAtrs);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBackground(new Color(4, 15, 15));
-		lblNewLabel.setIcon(new ImageIcon("resources/id.png"));
-		lblNewLabel.setBounds(585, 182, 303, 132);
-		contentPane.add(lblNewLabel);
-		
 		tfDireccion = new JTextField();
 		tfDireccion.setToolTipText("Fecha de Entrada");
 		tfDireccion.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfDireccion.setColumns(10);
-		tfDireccion.setBounds(585, 388, 303, 31);
+		tfDireccion.setBounds(582, 212, 303, 31);
 		contentPane.add(tfDireccion);
 		
 		JLabel lblDireccin = new JLabel("Dirección");
 		lblDireccin.setForeground(Color.WHITE);
 		lblDireccin.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblDireccin.setBounds(478, 383, 82, 41);
+		lblDireccin.setBounds(475, 207, 82, 41);
 		contentPane.add(lblDireccin);
 		
 		JLabel lblCiudad = new JLabel("Ciudad");
 		lblCiudad.setForeground(Color.WHITE);
 		lblCiudad.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblCiudad.setBounds(478, 438, 82, 41);
+		lblCiudad.setBounds(475, 262, 82, 41);
 		contentPane.add(lblCiudad);
 		
 		tfCiudad = new JTextField();
 		tfCiudad.setToolTipText("Fecha de Entrada");
 		tfCiudad.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfCiudad.setColumns(10);
-		tfCiudad.setBounds(585, 443, 303, 31);
+		tfCiudad.setBounds(582, 267, 303, 31);
 		contentPane.add(tfCiudad);
 		
 		JLabel lblId = new JLabel("Identificador");
 		lblId.setForeground(Color.WHITE);
 		lblId.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
-		lblId.setBounds(31, 216, 115, 41);
+		lblId.setBounds(21, 156, 115, 41);
 		contentPane.add(lblId);
 		
 		tfId = new JTextField();
 		tfId.setEnabled(false);
 		tfId.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		tfId.setColumns(10);
-		tfId.setBounds(156, 220, 234, 33);
+		tfId.setBounds(146, 160, 234, 33);
 		contentPane.add(tfId);
 		
-		JComboBox combo_buscar = new JComboBox();
-		combo_buscar.setBounds(31, 150, 359, 29);
-		contentPane.add(combo_buscar);
+		
+		
+		JLabel lblSeleccionaUnEmpleado = new JLabel("Selecciona un empleado para modificar sus datos o eliminarlo.\r\n");
+		lblSeleccionaUnEmpleado.setForeground(Color.WHITE);
+		lblSeleccionaUnEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
+		lblSeleccionaUnEmpleado.setBounds(21, 513, 493, 41);
+		contentPane.add(lblSeleccionaUnEmpleado);
 		for (int i = 0; i < empleados.size(); i++) {
 			combo_buscar.addItem(empleados.get(i).getNombre() + " " + empleados.get(i).getApellido());
 		}
@@ -363,15 +384,20 @@ public class Operaciones_generales extends JFrame {
 		
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tfId.setText("");
-				tfNombre.setText("");
-				tfApellido.setText("");
-				tfSueldo.setText("");
-				tfEntrada.setText("");
-				tfDNI.setText("");
-				tfDireccion.setText("");
-				tfCiudad.setText("");
+				limpiar();
 			}
 		});
+	}
+	
+	public void limpiar() {
+		combo.setSelectedIndex(0);
+		tfId.setText("");
+		tfNombre.setText("");
+		tfApellido.setText("");
+		tfSueldo.setText("");
+		tfEntrada.setText("");
+		tfDNI.setText("");
+		tfDireccion.setText("");
+		tfCiudad.setText("");
 	}
 }
