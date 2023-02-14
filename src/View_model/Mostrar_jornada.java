@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import Connection_DB.Connection_SGL;
 import DAO_model.Empleado_DAO;
 import DAO_model.Jornada_DAO;
 import DTO_model.Empleado_DTO;
@@ -31,6 +32,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextField;
 
 public class Mostrar_jornada extends JDialog {
 
@@ -44,6 +46,7 @@ public class Mostrar_jornada extends JDialog {
 	public static Jornada_DAO jornadaDAO = new Jornada_DAO();
 	static ArrayList<Jornada_DTO> jornada;
 	static ArrayList<String> nombresEmpleados = new ArrayList<String>();
+	private JTextField tfId;
 
 	//
 	/**
@@ -112,7 +115,7 @@ public class Mostrar_jornada extends JDialog {
 		scrollPane.setViewportView(table);
 		JComboBox combo_nom = new JComboBox();
 		combo_nom.setBounds(438, 362, 211, 29);
-		for (int i = 0; i < empleados.size(); i++) {
+		for (int i = 1; i < empleados.size(); i++) {
 			combo_nom.addItem(empleados.get(i).getNombre());
 		}
 		contentPanel.add(combo_nom);
@@ -160,17 +163,63 @@ public class Mostrar_jornada extends JDialog {
 		contentPanel.add(btnAtrs);
 
 		JButton btnInformeGeneral = new JButton("Informe General");
+		btnInformeGeneral.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*JasperPrint jasperPrint = null;
+		        // Genera un PDF que se guarda en la carpeta del proyecto JasperPrint
+		        try {
+		            jasperPrint = JasperFillManager.fillReport("src\\View_model\\InformeGeneral.jasper", null,
+		                    Connection_SGL.getInstancia().getCon());
+		        } catch (JRException e1) {
+		            // TODO Auto-generated catch block
+		            e1.printStackTrace();
+		        }
+		        JRPdfExporter exp = new JRPdfExporter();
+		        exp.setExporterInput(new SimpleExporterInput(jasperPrint));
+		        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("InformeGeneralPDF.pdf"));
+		        JOptionPane.showMessageDialog(null, "Informe generado y almacenado", "PDF Guardado", JOptionPane.PLAIN_MESSAGE);
+		        try {
+		            exp.exportReport();
+		        } catch (
+
+		        JRException e1) {
+		        }*/
+			}
+		});
 		btnInformeGeneral.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnInformeGeneral.setBorder(null);
 		btnInformeGeneral.setBackground(new Color(251, 249, 255));
-		btnInformeGeneral.setBounds(62, 421, 220, 41);
+		btnInformeGeneral.setBounds(62, 405, 220, 41);
 		contentPanel.add(btnInformeGeneral);
 
-		JButton btnInformePorEmpleado = new JButton("Informe por Empleado");
+		JButton btnInformePorEmpleado = new JButton("Informe RRHH");
+		btnInformePorEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*JasperPrint jasperPrint = null;
+		        // Genera un PDF que se guarda en la carpeta del proyecto JasperPrint
+		        try {
+		            jasperPrint = JasperFillManager.fillReport("src\\View_model\\InformeRRHH.jasper", null,
+		                    Connection_SGL.getInstancia().getCon());
+		        } catch (JRException e1) {
+		            // TODO Auto-generated catch block
+		            e1.printStackTrace();
+		        }
+		        JRPdfExporter exp = new JRPdfExporter();
+		        exp.setExporterInput(new SimpleExporterInput(jasperPrint));
+		        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("InformeRRHHPDF.pdf"));
+		        JOptionPane.showMessageDialog(null, "Informe generado y almacenado", "PDF Guardado", JOptionPane.PLAIN_MESSAGE);
+		        try {
+		            exp.exportReport();
+		        } catch (
+
+		        JRException e1) {
+		        }*/
+			}
+		});
 		btnInformePorEmpleado.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnInformePorEmpleado.setBorder(null);
 		btnInformePorEmpleado.setBackground(new Color(251, 249, 255));
-		btnInformePorEmpleado.setBounds(338, 421, 219, 41);
+		btnInformePorEmpleado.setBounds(62, 451, 219, 41);
 		contentPanel.add(btnInformePorEmpleado);
 		
 		JButton btnMostrar = new JButton("Mostrar Todo");
@@ -193,6 +242,47 @@ public class Mostrar_jornada extends JDialog {
 		JSeparator separator_1_1_1_1 = new JSeparator();
 		separator_1_1_1_1.setBounds(30, 502, 880, 12);
 		contentPanel.add(separator_1_1_1_1);
+		
+		JButton btnInformeJornadaLaboral = new JButton("Informe Jornada Laboral");
+		btnInformeJornadaLaboral.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*JasperPrint jasperPrint = null;
+		        Map <String, Object> parametros = new HashMap(); parametros.put ("Parameter1", Integer.valueOf(tfId.getText()));
+		        try {
+		            jasperPrint = JasperFillManager.fillReport("src\\View_model\\InformeJornada.jasper", null,
+		                    Connection_SGL.getInstancia().getCon());
+		        } catch (JRException e1) {
+		            // TODO Auto-generated catch block
+		            e1.printStackTrace();
+		        }
+		        JRPdfExporter exp = new JRPdfExporter();
+		        exp.setExporterInput(new SimpleExporterInput(jasperPrint));
+		        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("InformeJornada.pdf"));
+		        JOptionPane.showMessageDialog(null, "Informe generado y almacenado", "PDF Guardado", JOptionPane.PLAIN_MESSAGE);
+		        try {
+		            exp.exportReport();
+		        } catch (
+
+		        JRException e1) {
+		        }*/
+			}
+		});
+		btnInformeJornadaLaboral.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
+		btnInformeJornadaLaboral.setBorder(null);
+		btnInformeJornadaLaboral.setBackground(new Color(251, 249, 255));
+		btnInformeJornadaLaboral.setBounds(582, 451, 232, 41);
+		contentPanel.add(btnInformeJornadaLaboral);
+		
+		tfId = new JTextField();
+		tfId.setBounds(337, 451, 211, 41);
+		contentPanel.add(tfId);
+		tfId.setColumns(10);
+		
+		JLabel lblIdDeEmpleado = new JLabel("Introduce ID de Empleado para generar Informe:\r\n");
+		lblIdDeEmpleado.setForeground(Color.WHITE);
+		lblIdDeEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+		lblIdDeEmpleado.setBounds(337, 401, 388, 41);
+		contentPanel.add(lblIdDeEmpleado);
 
 	}
 
