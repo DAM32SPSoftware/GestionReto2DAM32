@@ -16,9 +16,13 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Frame;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+
 
 public class Main extends JFrame {
 
@@ -45,6 +49,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setUndecorated(true);
 		//
 		Image imgIcon = Toolkit.getDefaultToolkit().getImage("resources/logoapp2.png");
         setIconImage(imgIcon);
@@ -54,7 +59,7 @@ public class Main extends JFrame {
 		setBounds(100, 100, 534, 634);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(138, 153, 148));
-		contentPane.setBorder(null);
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -70,6 +75,14 @@ public class Main extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnEmpleados = new JButton("Listado de Empleados");
+		btnEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mostrar_empleados mostrar_emp;
+				mostrar_emp = new Mostrar_empleados();
+				mostrar_emp.llenarTabla();
+				mostrar_emp.setVisible(true);
+			}
+		});
 		btnEmpleados.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnEmpleados.setBorder(null);
 		btnEmpleados.setBackground(new Color(251, 249, 255));
@@ -91,6 +104,12 @@ public class Main extends JFrame {
 		contentPane.add(separator_1);
 		
 		JButton btnOperacionesConEmpleados = new JButton("Operaciones Generales");
+		btnOperacionesConEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Operaciones_generales Operaciones_generales = new Operaciones_generales();
+				Operaciones_generales.setVisible(true);
+			}
+		});
 		btnOperacionesConEmpleados.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnOperacionesConEmpleados.setBorder(null);
 		btnOperacionesConEmpleados.setBackground(new Color(251, 249, 255));
@@ -98,13 +117,27 @@ public class Main extends JFrame {
 		contentPane.add(btnOperacionesConEmpleados);
 		
 		JButton btnHorarios = new JButton("Horarios");
+		btnHorarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mostrar_jornada mostrar_jornada = new Mostrar_jornada();
+				mostrar_jornada.llenarTabla();
+				mostrar_jornada.setVisible(true);
+			}
+		});
 		btnHorarios.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnHorarios.setBorder(null);
 		btnHorarios.setBackground(new Color(251, 249, 255));
 		btnHorarios.setBounds(137, 384, 231, 41);
 		contentPane.add(btnHorarios);
 		
-		JButton btnBsquedas = new JButton("Búsquedas");
+		JButton btnBsquedas = new JButton("Administrar Usuarios");
+		btnBsquedas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mostrar_Usuarios mostrar_usuario = new Mostrar_Usuarios();
+				mostrar_usuario.llenarTabla();
+				mostrar_usuario.setVisible(true);
+			}
+		});
 		btnBsquedas.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnBsquedas.setBorder(null);
 		btnBsquedas.setBackground(new Color(251, 249, 255));
